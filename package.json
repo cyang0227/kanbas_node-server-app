@@ -1,0 +1,34 @@
+{
+  "type": "module",
+  "name": "kanbas_node-server-app",
+  "version": "1.0.0",
+  "description": "kanbas-server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node App.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cyang0227/kanbas_node-server-app.git"
+  },
+  "keywords": [
+    "Node",
+    "Rest",
+    "Server",
+    "HTTP",
+    "Web",
+    "Development",
+    "CS5610"
+  ],
+  "author": "Chen Yang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cyang0227/kanbas_node-server-app/issues"
+  },
+  "homepage": "https://github.com/cyang0227/kanbas_node-server-app#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  }
+}
