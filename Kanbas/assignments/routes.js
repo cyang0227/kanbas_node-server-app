@@ -1,5 +1,13 @@
 import db from "../Database/index.js";
 function AssignmentRoutes(app) {
+  //get assignment by id
+    app.get("/api/assignments/:aid", (req, res) => {
+        const { aid } = req.params;
+        const assignment = db.assignments.find((a) => a._id === aid);
+        res.send(assignment);
+    });
+
+
   app.get("/api/courses/:cid/assignments", (req, res) => {
     const { cid } = req.params;
     const assignments = db.assignments.filter((a) => a.course === cid);
