@@ -7,7 +7,11 @@ export default function UserRoutes(app) {
   const findUserById = async (req, res) => { };
   const updateUser = async (req, res) => { };
   const signup = async (req, res) => { };
-  const signin = async (req, res) => { };
+  const signin = async (req, res) => {
+    const { username, password } = req.body;
+    currentUser = await dao.findUserByCredentials(username, password);
+    res.json(currentUser);
+   };
   const signout = (req, res) => { };
   const profile = async (req, res) => { };
   app.post("/api/users", createUser);
