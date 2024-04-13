@@ -13,7 +13,11 @@ import AssignmentRoutes from "./Kanbas/assignments/routes.js";
 const app = express();
 const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0.1:27017/kanbas';
 mongoose.connect(CONNECTION_STRING);
-app.use(cors());
+app.use(cors(
+    {
+        AccessControlAllowOrigin: "*",
+    }
+));
 // const sessionOptions = {
 //   secret: process.env.SESSION_SECRET,
 //   resave: false,
