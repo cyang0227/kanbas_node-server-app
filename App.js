@@ -15,7 +15,7 @@ const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || 'mongodb://127.0.0
 mongoose.connect(CONNECTION_STRING);
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL, // URL of the React app that we're connecting to
     credentials: true,
   })
 );

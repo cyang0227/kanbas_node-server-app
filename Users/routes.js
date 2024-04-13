@@ -32,7 +32,7 @@ export default function UserRoutes(app) {
   const signup = async (req, res) => {
     const user = await dao.findUserByUsername(req.body.username);
     if (user) {
-      res.json({ error: "Username exists" });
+      res.status(400).json({ error: "Username exists" });
       return;
     }
     const currentUser = await dao.createUser(req.body);
