@@ -13,13 +13,21 @@ import "dotenv/config";
 const app = express();
 mongoose.connect("mongodb://localhost:27017/kanbas");
 app.use(
-  cors()
+  cors(
+    {
+      // origin: "http://localhost:3000",
+      // credentials: true,
+    }
+  )
 );
+
 // const sessionOptions = {
 //   secret: process.env.SESSION_SECRET,
 //   resave: false,
 //   saveUninitialized: false,
 // };
+
+
 // if (process.env.NODE_ENV !== "development") {
 //   sessionOptions.proxy = true;
 //   sessionOptions.cookie = {
@@ -28,7 +36,9 @@ app.use(
 //     domain: process.env.HTTP_SERVER_DOMAIN,
 //   };
 // }
+
 // app.use(session(sessionOptions));
+
 app.use(express.json());
 CourseRoutes(app);
 ModuleRoutes(app);
