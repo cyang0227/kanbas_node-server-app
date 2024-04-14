@@ -3,14 +3,17 @@ import * as dao from "./dao.js";
 let currentUser = null;
 
 export default function UserRoutes(app) {
+  
   const createUser = async (req, res) => {
     const user = await dao.createUser(req.body);
     res.json(user);
   };
+
   const deleteUser = async (req, res) => {
     const status = await dao.deleteUser(req.params.userId);
     res.json(status);
   };
+
   const findAllUsers = async (req, res) => {
     const { role } = req.query;
     if (role) {
@@ -22,16 +25,19 @@ export default function UserRoutes(app) {
     res.json(users);
     return;
   };
+
   const findUserById = async (req, res) => {
     const user = await dao.findUserById(req.params.userId);
     res.json(user);
   };
+
   const updateUser = async (req, res) => {
     const { userId } = req.params;
     const status = await dao.updateUser(userId, req.body);
     currentUser = await dao.findUserById(userId);
     res.json(status);
   };
+
   const signup = async (req, res) => {
     const user = await dao.findUserByUsername(req.body.username);
     if (user) {
@@ -42,6 +48,7 @@ export default function UserRoutes(app) {
     // req.session["currentUser"] = currentUser;
     res.json(currentUser);
   };
+
   const signin = async (req, res) => {
     const { username, password } = req.body;
     const currentUser = await dao.findUserByCredentials(username, password);
