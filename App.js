@@ -11,12 +11,12 @@ import session from "express-session";
 import "dotenv/config";
 
 const app = express();
-const CONNECTION_STRING = process.DB_CONNECTION_STRING || "mongodb://localhost:27017/kanbas";
+const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || "mongodb://localhost:27017/kanbas";
 mongoose.connect(CONNECTION_STRING)
 app.use(
   cors(
     {
-      origin: "http://localhost:3000",
+      origin: process.env.FRONTEND_URL,
       credentials: true,
     }
   )
