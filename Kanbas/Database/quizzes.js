@@ -3,62 +3,93 @@ export default
     {
         _id: "Q101",
         name: "Q1 - HTML",
+        startDate: "2024-05-01",
         dueDate: "2024-05-31",
-        course: "RS101"
+        course: "RS101",
+        points: 50,
+        published: true,
     },
     {
         _id: "Q102",
         name: "Q2 - CSS",
+        startDate: "2024-06-01",
+        points: 25,
         dueDate: "2024-06-30",
-        course: "RS101"
+        course: "RS101",
+        published: true,
     },
     {
         _id: "Q103",
         name: "Q3 - JavaScript",
+        startDate: "2024-07-01",
+        points: 48,
         dueDate: "2024-07-31",
-        course: "RS101"
+        course: "RS101",
+        published: true,
     },
     {
         _id: "Q104",
         name: "Q4 - React",
+        startDate: "2024-08-01",
         dueDate: "2024-08-31",
-        course: "RS101"
+        points: 100,
+        course: "RS101",
+        published: true,
     },
     {
         _id: "Q105",
         name: "Q5 - Node.js",
+        start: "2024-09-01",
         dueDate: "2024-09-30",
-        course: "RS101"
+        points: 75,
+        course: "RS101",
+        published: false,
     },
     {
         _id: "Q106",
         name: "Q6 - Express",
+        startDate: "2024-10-01",
         dueDate: "2024-10-31",
-        course: "RS101"
+        points: 66,
+        course: "RS101",
+        published: false,
     },
     {
         _id: "Q107",
         name: "Q7 - MongoDB",
+        startDate: "2024-11-01",
         dueDate: "2024-11-30",
-        course: "RS101"
+        points: 46,
+        course: "RS101",
+        published: false,
     },
     {
         _id: "Q108",
         name: "Q8 - Mongoose",
+        startDate: "2024-12-01",
         dueDate: "2024-12-31",
-        course: "RS101"
+        points: 32,
+        course: "RS101",
+        published: false,
+
     },
     {
         _id: "Q109",
         name: "Q9 - RESTful APIs",
+        startDate: "2025-01-01",
         dueDate: "2025-01-31",
-        course: "RS101"
+        points: 56,
+        course: "RS101",
+        published: true,
     },
     {
         _id: "Q110",
         name: "Q10 - Authentication",
+        startDate: "2025-02-01",
         dueDate: "2025-02-28",
-        course: "RS101"
+        points: 67,
+        course: "RS101",
+        published: true,
     }
     
 ]
