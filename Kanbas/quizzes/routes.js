@@ -29,12 +29,20 @@ function QuizRoutes(app) {
     // update a quiz
     app.put("/api/quizzes/:qid", async (req, res) => {
         const { qid } = req.params;
-        const quizIndex = db.quizzes.findIndex((quiz) => quiz._id === qid);
-        db.quizzes[quizIndex] = {
-            ...db.quizzes[quizIndex],
-            ...req.body,
-        };
+        const quiz = req.body;
+        db.quizzes = db.quizzes.map((q) => (q._id === qid ? { ...q, ...quiz } : q));
         res.sendStatus(204);
+    });
+
+    // get a quiz from id
+    app.get("/api/quizzes/:qid", async (req, res) => {
+        const { qid } = req.params;
+        const quiz = db.quizzes.find((quiz) => quiz._id === qid);
+        if (!quiz) {
+            res.status(404).send("Quiz not found");
+            return;
+        }
+        res.send(quiz);
     });
 }
 export default QuizRoutes;

@@ -2,7 +2,7 @@ import * as dao from "./dao.js";
 
 let currentQuiz = null;
 
-export default function QuizRoutes(app) {
+export default function QuizRoutesDatabase(app) {
     const createQuiz = async (req, res) => {
         const quiz = await dao.createQuiz(req.body);
         res.json(quiz);
