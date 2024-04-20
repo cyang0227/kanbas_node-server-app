@@ -25,6 +25,7 @@ function QuizRoutes(app) {
         db.quizzes = db.quizzes.filter((quiz) => quiz._id !== qid);
         res.sendStatus(200);
     });
+    
     // update a quiz
     app.put("/api/quizzes/:qid", async (req, res) => {
         const { qid } = req.params;

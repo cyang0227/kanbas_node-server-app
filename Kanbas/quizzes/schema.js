@@ -19,7 +19,7 @@ const quizSchema = new mongoose.Schema(
     showCorrectAnswers: { type: Boolean, default: false },
     showCorrectAnswersAt: { type: Date },
     accessCode: { type: String },
-    oneQuestionAtATime: { type: Boolean, default: yes },
+    oneQuestionAtATime: { type: Boolean, default: true },
     webCamRequired: { type: Boolean, default: false },
     lockQuestionsAfterAnswering: { type: Boolean, default: false },
     dueDate: { type: Date },
