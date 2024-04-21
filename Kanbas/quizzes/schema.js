@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const optionSchema = new mongoose.Schema(
   {
-    option: String,
-    isCorrect: Boolean,
+    option: { type: String, default: ""} ,
+    isCorrect: { type: Boolean, default: false}
   },
   { _id: false }
 );
@@ -18,13 +18,14 @@ const questionSchema = new mongoose.Schema({
   },
   options: [optionSchema],
   correctAnswer: { type: String },
-  score: { type: Number, default: 0 },
+  points: { type: Number, default: 0 },
 }, {_id: false});
 
 const quizSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     description: { type: String },
+    points: { type: Number, default: 0 },
     type: {
       type: String,
       enum: ["Practice Quiz", "Graded Quiz", "Ungraded Survey"],
@@ -37,6 +38,11 @@ const quizSchema = new mongoose.Schema(
     },
     course: { type: String, required: true },
     shuffleAnswers: { type: Boolean, default: true },
+    viewResponse: {
+      type: String,
+      enum: ["Immediately", "After Due Date", "After All Attempts"],
+      default: "Immediately",
+    },
     timeLimit: { type: Number, default: 20 },
     multipleAttempts: { type: Boolean, default: false },
     showCorrectAnswers: { type: Boolean, default: false },
