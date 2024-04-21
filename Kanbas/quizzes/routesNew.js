@@ -1,39 +1,77 @@
 import * as dao from "./dao.js";
 
-let currentQuiz = null;
-
 export default function QuizRoutesDatabase(app) {
-    const createQuiz = async (req, res) => {
-        const quiz = await dao.createQuiz(req.body);
-        res.json(quiz);
-    };
-    const findAllQuizzes = async (req, res) => {
-        const quizzes = await dao.findAllQuizzes();
-        res.json(quizzes);
-    };
-    const findQuizById = async (req, res) => {
-        const quiz = await dao.findQuizById(req.params.quizId);
-        res.json(quiz);
-    };
-    const findQuizzesByCourse = async (req, res) => {
-        const quizzes = await dao.findQuizzesByCourse(req.params.course);
-        res.json(quizzes);
+  app.post("/api/courses/:cid/quizzes", async (req, res) => {
+    try {
+      const quiz = await dao.createQuiz(req.body);
+      res.status(201).json(quiz);
+    } catch (error) {
+      console.error("Failed to create a quiz :", error);
+      res.status(500).json({ error: "Internal server error" });
     }
-    const updateQuiz = async (req, res) => {
-        const { quizId } = req.params;
-        const status = await dao.updateQuiz(quizId, req.body);
-        currentQuiz = await dao.findQuizById(quizId);
-        res.json(status);
-    };
-    const deleteQuiz = async (req, res) => {
-        const status = await dao.deleteQuiz(req.params.quizId);
-        res.json(status);
-    };
-}
+  });
 
-app.post("/api/courses/:cid/quizzes", createQuiz);
-app.get("/api/quizzes", findAllQuizzes);
-app.get("/api/quizzes/:quizId", findQuizById);
-app.get("/api/courses/:course/quizzes", findQuizzesByCourse);
-app.put("/api/quizzes/:quizId", updateQuiz);
-app.delete("/api/quizzes/:quizId", deleteQuiz);
+  app.get("/api/quizzes", async (req, res) => {
+    try {
+      const quizzes = await dao.findAllQuizzes();
+      res.json(quizzes);
+    } catch (error) {
+      console.error("Failed to get all quizzes:", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.get("/api/quizzes/:quizId", async (req, res) => {
+    try {
+      const quiz = await dao.findQuizById(req.params.quizId);
+      if (!quiz) {
+        res.status(404).json({ error: "Quiz not found" });
+      } else {
+        res.json(quiz);
+      }
+    } catch (error) {
+      console.error("Failed to get a quiz of quizId " + {quizId}, error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.get("/api/courses/:course/quizzes", async (req, res) => {
+    try {
+      const quizzes = await dao.findQuizzesByCourse(req.params.course);
+      res.json(quizzes);
+    } catch (error) {
+      console.error("Failed to get quizzes of a course", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.put("/api/quizzes/:quizId", async (req, res) => {
+    try {
+      const status = await dao.updateQuiz(req.params.quizId, req.body);
+      if (!status.modifiedCount) {
+        return res
+          .status(404)
+          .json({ error: "Quiz not found or no change made" });
+      }
+      const updatedQuiz = await dao.findQuizById(req.params.quizId);
+      res.json(updatedQuiz);
+    } catch (error) {
+      console.error("Failed to update a quiz", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+
+  app.delete("/api/quizzes/:quizId", async (req, res) => {
+    try {
+      const status = await dao.deleteQuiz(req.params.quizId);
+      if (status.deletedCount === 0) {
+        res.status(404).json({ error: "Quiz not found" });
+      } else {
+        res.status(204).send();
+      }
+    } catch (error) {
+      console.error("Failed to delete a quiz", error);
+      res.status(500).json({ error: "Internal server error" });
+    }
+  });
+}

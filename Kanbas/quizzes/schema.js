@@ -1,7 +1,30 @@
 import mongoose from "mongoose";
+
+const optionSchema = new mongoose.Schema(
+  {
+    option: String,
+    isCorrect: Boolean,
+  },
+  { _id: false }
+);
+
+const questionSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  content: { type: String, required: true },
+  type: {
+    type: String,
+    enum: ["Multiple Choice", "True False", "Fill in the Blank"],
+    default: "Multiple Choice",
+  },
+  options: [optionSchema],
+  correctAnswer: { type: String },
+  score: { type: Number, default: 0 },
+}, {_id: false});
+
 const quizSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
+    description: { type: String },
     type: {
       type: String,
       enum: ["Practice Quiz", "Graded Quiz", "Ungraded Survey"],
@@ -25,20 +48,7 @@ const quizSchema = new mongoose.Schema(
     dueDate: { type: Date },
     availableDate: { type: Date },
     untilDate: { type: Date },
-    qustions: [
-      {
-        question: { type: String },
-        points: { type: Number, default: 0 },
-        type: {
-          type: String,
-          enum: ["Multiple Choice", "True/False", "Fill in the Blank"],
-          default: "Multiple Choice",
-        },
-        options: [{ type: String }, { type: Boolean}],
-        correctAnswer: { type: String },
-      },
-    ]
-
+    qustions: [questionSchema],
   },
   { collection: "quizzes" }
 );
