@@ -1,4 +1,4 @@
-import quizModel from "./model";
+import quizModel from "./model.js";
 
 export const createQuiz = async (quiz) => {
   try {
@@ -31,7 +31,7 @@ export const findQuizById = async (id) => {
   }
 };
 
-export const findQuizByCourse = async (courseId) => {
+export const findQuizzesByCourse = async (courseId) => {
   try {
     const quizzes = await quizModel.find({ course: courseId });
     return quizzes;
