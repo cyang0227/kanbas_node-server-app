@@ -42,7 +42,7 @@ function AssignmentRoutes(app) {
       ...db.assignments[assignmentIndex],
       ...req.body
     };
-    res.sendStatus(204);
+    res.send(db.assignments[assignmentIndex])
   });
 }
 export default AssignmentRoutes;
