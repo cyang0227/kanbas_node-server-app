@@ -17,30 +17,30 @@ const CONNECTION_STRING = process.env.DB_CONNECTION_STRING || "mongodb://localho
 mongoose.connect(CONNECTION_STRING)
 app.use(
   cors(
-    {
-      origin: process.env.FRONTEND_URL,
-      credentials: true,
-    }
+    // {
+    //   origin: process.env.FRONTEND_URL,
+    //   credentials: true,
+    // }
   )
 );
 
-const sessionOptions = {
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-};
+// const sessionOptions = {
+//   secret: process.env.SESSION_SECRET,
+//   resave: false,
+//   saveUninitialized: false,
+// };
 
 
-if (process.env.NODE_ENV !== "development") {
-  sessionOptions.proxy = true;
-  sessionOptions.cookie = {
-    sameSite: "none",
-    secure: true,
-    domain: process.env.HTTP_SERVER_DOMAIN,
-  };
-}
+// if (process.env.NODE_ENV !== "development") {
+//   sessionOptions.proxy = true;
+//   sessionOptions.cookie = {
+//     sameSite: "none",
+//     secure: true,
+//     domain: process.env.HTTP_SERVER_DOMAIN,
+//   };
+// }
 
-app.use(session(sessionOptions));
+// app.use(session(sessionOptions));
 
 app.use(express.json());
 CourseRoutes(app);
