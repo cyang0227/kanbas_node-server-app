@@ -2,8 +2,8 @@ import mongoose from "mongoose";
 
 const optionSchema = new mongoose.Schema(
   {
-    option: { type: String, default: ""} ,
-    isCorrect: { type: Boolean, default: false}
+    value: { type: String, default: ""} ,
+    isCorrect: { type: Boolean, default: false },
   },
   { _id: false }
 );
