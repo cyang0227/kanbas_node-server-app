@@ -55,7 +55,7 @@ const quizSchema = new mongoose.Schema(
     dueDate: { type: Date },
     availableDate: { type: Date },
     untilDate: { type: Date },
-    qustions: [questionSchema],
+    questions: [questionSchema],
   },
   { collection: "quizzes" }
 );
